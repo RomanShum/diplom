@@ -1,11 +1,21 @@
-import { createStore, combineReducers } from 'redux';
-import hrefReducer from './hrefReducer'
-
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import hrefReducer from "./hrefReducer";
+import { categoriesReducer } from "./categoriesReducer";
+import { categoryItemsReducer } from "./categoryItemsReducer";
+import { categoryHitsReducer } from "./categoryHitsReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const reducer = combineReducers({
-    Menu:hrefReducer
-})
+  Menu: hrefReducer,
+  Categories: categoriesReducer,
+  CategoryItems: categoryItemsReducer,
+  Hits: categoryHitsReducer,
+});
 
-const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(thunkMiddleware))
+);
 
 export default store;
