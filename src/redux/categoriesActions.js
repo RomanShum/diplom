@@ -1,12 +1,23 @@
 import { TestAction } from "./categoriesReducer";
 import { GetAllAction } from "./categoryItemsReducer";
 import { GetAllHits } from "./categoryHitsReducer";
+import {LoadCategoryAction} from "./categoryItemsReducer";
 
 export async function fetchCategories(dispatch) {
   fetch(`http://localhost:7070/api/categories`)
     .then((resp) => resp.json())
     .then((json) => dispatch(TestAction(json)));
 }
+
+export function loadOne(id){
+  return async function loadCategory(dispatch) {
+    const id_cat = {id};
+    fetch(`http://localhost:7070/api/items?categoryId=${id_cat.id}`)
+      .then((resp) => resp.json())
+      .then((json) => dispatch(LoadCategoryAction(json)));
+  }
+}
+
 
 export async function fetchGetAll(dispatch) {
   fetch(`http://localhost:7070/api/items`)
