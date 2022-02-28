@@ -1,5 +1,11 @@
 import Loader from "./Loader";
+import MoreItems from "./MoreItems";
 export default function Hits(props) {
+
+  const onHandleLoad = () => {
+    props.onLoadMore();
+  }
+
   if (props.hits.status != "ok" || props.status == "idle") {
     return <Loader />;
   }
@@ -26,6 +32,7 @@ export default function Hits(props) {
           </div>
         ))}
       </div>
+      {props.children!=undefined ?  <MoreItems onHandleClick={onHandleLoad} /> : <></>}
     </>
   );
 }
