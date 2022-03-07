@@ -14,8 +14,8 @@ export const categoryItemsReducer = (state = initialState, action) => {
     case GET_ONE:
       return { status: "ok", items: action.payload };
     case GET_MORE:
-      let new_items=action.payload;
-      return { status: "ok", items: state.items.concat(new_items)};
+      let new_items = action.payload;
+      return { status: "ok", items: state.items.concat(new_items) };
     default:
       return state;
   }
