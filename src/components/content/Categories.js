@@ -1,9 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 
-export default function Categories({ categories, onLoadCategory }) {
+export default function Categories({ categories, onLoadCategory, path }) {
   const location = useLocation();
   const id = location.state != null ? location.state.id : 1;
-
   const onHandlerClick = (e) => {
     onLoadCategory(e.target.dataset.id);
   };
@@ -11,7 +10,7 @@ export default function Categories({ categories, onLoadCategory }) {
   return (
     <ul className="catalog-categories nav justify-content-center">
       {categories.map((item) => (
-        <Link to={`/${item.id}`} state={{ id: item.id }}>
+        <Link to={`${path}/${item.id}`} state={{ id: item.id }}>
           <li className="nav-item" key={item.id} onClick={onHandlerClick}>
             <a
               className={item.id === id ? "nav-link active" : "nav-link"}

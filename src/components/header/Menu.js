@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useLocation, Link } from "react-router-dom";
 
 export default function Menu() {
   const items = useSelector((state) => state.Menu);
@@ -11,9 +12,11 @@ export default function Menu() {
       <ul className="navbar-nav mr-auto">
         {items.map((item) => (
           <li className="nav-item active">
-            <a className="nav-link" href="/">
-              {item.title}
-            </a>
+            <Link to={item.href}>
+              <a className="nav-link" href="/">
+                {item.title}
+              </a>
+            </Link>
           </li>
         ))}
       </ul>
