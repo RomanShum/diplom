@@ -5,6 +5,7 @@ import Main from "./layouts/Main";
 import Footer from "./layouts/Footer";
 import Categories from "./components/content/Categories";
 import About from "./layouts/About";
+import View from "./layouts/View";
 import Contacts from "./layouts/Contacts";
 import CategoryPage from "./layouts/CatalogPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/category" element={<CategoryPage />}>
             <Route path=":categoryId" element={<CategoryPage />} />
           </Route>
+          <Route path="/view/:id" element={<View />} />
           <Route path="/about" element={<About />} />
           <Route path="/contacts" element={<Contacts />} />
         </Routes>

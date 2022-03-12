@@ -1,5 +1,6 @@
 import Loader from "./Loader";
 import MoreItems from "./MoreItems";
+import { Link } from "react-router-dom";
 export default function Hits(props) {
   const onHandleLoad = () => {
     props.onLoadMore();
@@ -22,9 +23,11 @@ export default function Hits(props) {
               <div className="card-body">
                 <p className="card-text">{item.title}</p>
                 <p className="card-text">{item.price} руб.</p>
-                <a href="/products/1.html" className="btn btn-outline-primary">
-                  Заказать
-                </a>
+                <Link to={`/view/${item.id}`} state={{ id: item.id }}>
+                  <a href="#" className="btn btn-outline-primary">
+                    Заказать
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

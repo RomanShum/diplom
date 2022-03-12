@@ -1,5 +1,3 @@
-import { GET_HREF_MENU } from "./Actions";
-
 const initialState = [
   { title: "Главная", href: "/" },
   { title: "Каталог", href: "category" },

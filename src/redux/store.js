@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import hrefReducer from "./hrefReducer";
 import { categoriesReducer } from "./categoriesReducer";
+import { viewReducer } from "./viewReducer";
 import { categoryItemsReducer } from "./categoryItemsReducer";
 import { categoryHitsReducer } from "./categoryHitsReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   Categories: categoriesReducer,
   CategoryItems: categoryItemsReducer,
   Hits: categoryHitsReducer,
+  View: viewReducer,
 });
 
 const store = createStore(
