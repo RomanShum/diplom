@@ -1,18 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchItem } from "../redux/viewActions";
+import { addCart } from "../redux/cartActions";
 import { useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/content/Loader";
 
 export default function View() {
+  const [count, setCount] = useState(1);
+  const [size, setSize] = useState(null);
   const dispatch = useDispatch();
   let location = useLocation();
   let item = useSelector((state) => state.View);
   let is_active = true;
+
   useEffect(() => {
     dispatch(fetchItem(location.state.id));
   }, []);
 
+  const addToCart = () => {
+    let json = {
+      id: item.id,
+      title: item.title,
+      price: location.state.price,
+      quantity: count,
+      size: size,
+    };
+    dispatch(addCart(json));
+  };
   if (item.status != "ok") {
     return <Loader />;
   }
@@ -61,9 +75,16 @@ export default function View() {
                   <div class="text-center">
                     <p>
                       Размеры в наличии:
-                      {item.sizes.map((size) =>
+                      {item.sizes.map((size, i) =>
                         size.avalible == true ? (
-                          <span class="catalog-item-size">{size.size}</span>
+                          <span
+                            class="catalog-item-size selected"
+                            onClick={() => {
+                              setSize(size.size);
+                            }}
+                          >
+                            {size.size}
+                          </span>
                         ) : (
                           ""
                         )
@@ -73,9 +94,23 @@ export default function View() {
                       <p>
                         Количество:
                         <span class="btn-group btn-group-sm pl-2">
-                          <button class="btn btn-secondary">-</button>
-                          <span class="btn btn-outline-primary">1</span>
-                          <button class="btn btn-secondary">+</button>
+                          <button
+                            class="btn btn-secondary"
+                            onClick={() =>
+                              count > 0 ? setCount(count - 1) : 0
+                            }
+                          >
+                            -
+                          </button>
+                          <span class="btn btn-outline-primary">{count}</span>
+                          <button
+                            class="btn btn-secondary"
+                            onClick={() =>
+                              count < 10 ? setCount(count + 1) : 10
+                            }
+                          >
+                            +
+                          </button>
                         </span>
                       </p>
                     ) : (
@@ -83,7 +118,10 @@ export default function View() {
                     )}
                   </div>
                   {is_active ? (
-                    <button class="btn btn-danger btn-block btn-lg">
+                    <button
+                      class="btn btn-danger btn-block btn-lg"
+                      onClick={addToCart}
+                    >
                       В корзину
                     </button>
                   ) : (

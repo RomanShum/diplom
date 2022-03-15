@@ -23,7 +23,10 @@ export default function Hits(props) {
               <div className="card-body">
                 <p className="card-text">{item.title}</p>
                 <p className="card-text">{item.price} руб.</p>
-                <Link to={`/view/${item.id}`} state={{ id: item.id }}>
+                <Link
+                  to={`/view/${item.id}`}
+                  state={{ id: item.id, price: item.price }}
+                >
                   <a href="#" className="btn btn-outline-primary">
                     Заказать
                   </a>

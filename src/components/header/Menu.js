@@ -3,6 +3,8 @@ import { useLocation, Link } from "react-router-dom";
 
 export default function Menu() {
   const items = useSelector((state) => state.Menu);
+  const count = useSelector((state) => state.Cart);
+  console.log(items);
   return (
     <div
       className="collapase navbar-collapse"
@@ -27,7 +29,12 @@ export default function Menu() {
             className="header-controls-pic header-controls-search"
           ></div>
           <div className="header-controls-pic header-controls-cart">
-            <div className="header-controls-cart-full">1</div>
+            {count.count > 0 ? (
+              <div className="header-controls-cart-full">{count.count}</div>
+            ) : (
+              ""
+            )}
+
             <div className="header-controls-cart-menu"></div>
           </div>
         </div>
