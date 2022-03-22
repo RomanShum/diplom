@@ -19,7 +19,8 @@ export const cartReducer = (state = initialState, action) => {
           : JSON.parse(localStorage.getItem("cart"));
       items.push(action.payload);
       localStorage.setItem("cart", JSON.stringify(items));
-      return state;
+      state.count++;
+      return { ...state };
     default:
       return state;
   }
